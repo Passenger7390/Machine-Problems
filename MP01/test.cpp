@@ -4,25 +4,27 @@
 
 #include <iostream>
 #include <iomanip>
-#include <conio.h>
+#include <conio.h> // header for getting keyboard input
+#include <windows.h> // header used in sleep function
 using namespace std;
 
+// class declaration
 class GasPump {
     private:
         double liter; // total quantity of gas
         double cost; // cost of gas per liter
         double total; // total cost of gas per liter
     public:
-        GasPump();
+        GasPump(); // Constructor
         void showLiter();
         void showCost();
         void showTotal();
-        void distribute();
-        void keypress();
+        void reset();
+        void calc();
         
 };
 
-GasPump::GasPump() {
+GasPump::GasPump() { // Constructor
 
     liter = 00000.00;
     cost = 62.00;
@@ -30,64 +32,76 @@ GasPump::GasPump() {
 
 };
 
-void keypress(); // function declaration for detecting keypress
-
 int main() {
-
+    // Variable Declaration
     char key;
     int ascii;
     bool t = true;
     
-    GasPump test;
+    GasPump test; 
 
-    while(t) {
-        key = getch();
-        ascii = key;
-        
-        if (ascii == 27)
+
+    do {
+        Sleep(150);
+        system("cls"); // clear screen
+        test.showLiter(); // show liter
+        test.showCost(); // show price per liter
+        test.showTotal(); // show total price
+
+        key = getch(); // keyboard input
+        ascii = key; // assigning char value of keyboard input to integer value of keyboard input
+
+        if (ascii == 27) { // pressing esc button to exit the program
             break;
-        else if (ascii == 120)
-            test.keypress();   
+        }
+        else if (ascii == 13) { // pressing enter key to fill up the tank
+            test.calc(); 
+        }
+        else if (ascii == 120) { // x button
+            test.reset();   // resetting the values to 0
+        }
         
-        
-    }
-    
+    } while (t);
+
     return 0;
 };
 
-void GasPump::keypress() {
+void GasPump::reset() { // method to reset the values
+    
+    system("cls"); // clearing screen
+
+    liter = 00000.00;
+    cost = 62.00;
+    total = 00.00;
+
     showLiter();
     showCost();
     showTotal();
-  
+    
 }; 
 
-void GasPump::showLiter() {
+void GasPump::showLiter() { // method to show liter
     
-    string statement;
-        
-    statement = "Liter : ";
-    cout << fixed << setprecision(2) << left << setw(19) << statement << liter << "\r\n";
+    cout << fixed << setprecision(2) << left << setw(19);
+    cout << "Liter : " << liter <<endl;
+  
+};
+
+void GasPump::showCost() { // method to show price per liter
+
+    cout << fixed << setprecision(2) << left << setw(19);
+    cout << "Price per Liter : " << "PhP " << cost << endl;
+  
+};
+
+void GasPump::showTotal() { // method to show total price of the gas
+    
+    cout << fixed << setprecision(2) << left << setw(19);
+    cout << "Price : " << total;
+    
+};
+
+void GasPump::calc() { // calculating the total amount of gas
     liter = liter + 0.2;
+    total = liter * cost;
 };
-
-void GasPump::showCost() {
-
-    string statement,s1;
-    s1 = "PhP ";
-    statement = "Price per Liter : ";
-    cout << fixed << setprecision(2) << left << setw(19) << statement << s1 << cost << "\n";
-
-};
-
-void GasPump::showTotal() {
-    
-    string statement, s1;
-
-    statement = "Price : ";
-    
-    cout << fixed << setprecision(2) << left << setw(19) << statement << total << "\n";
-    total = cost * liter;
-
-};
-
