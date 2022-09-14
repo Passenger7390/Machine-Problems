@@ -7,9 +7,13 @@ using namespace std;
 
 class GasPump {
     private:
-        double liter;
-        double cost;
-        double total;
+        double liter; // total quantity of gas
+        double cost; // cost of gas per liter
+        double total; // total cost of gas per liter
+    public:
+        void showLiter();
+        void showCost();
+        void showTotal();
         
 };
 
