@@ -13,69 +13,81 @@ class GasPump {
         double cost; // cost of gas per liter
         double total; // total cost of gas per liter
     public:
-      //  void askInput();
+        GasPump();
         void showLiter();
         void showCost();
         void showTotal();
         void distribute();
+        void keypress();
         
+};
+
+GasPump::GasPump() {
+
+    liter = 00000.00;
+    cost = 62.00;
+    total = 00.00;
+
 };
 
 void keypress(); // function declaration for detecting keypress
 
 int main() {
-    GasPump test;
-    test.showLiter();
-    test.showCost();
-    test.showTotal();
 
+    char key;
+    int ascii;
+    bool t = true;
+    
+    GasPump test;
+
+    while(t) {
+        key = getch();
+        ascii = key;
+        
+        if (ascii == 27)
+            break;
+        else if (ascii == 120)
+            test.keypress();   
+        
+        
+    }
+    
     return 0;
 };
 
-void keypress() {
-
-    char key; 
-    int ascii;
-    bool i = true;
-
-    while(i) {
-
-        key = getch();
-        ascii = key;
-
-        if (ascii == 27)
-            i = false;
-
-        cout << "Key " << key << " is pressed!," << " ascii value is " << ascii << endl;
-    }
-
-};
+void GasPump::keypress() {
+    showLiter();
+    showCost();
+    showTotal();
+  
+}; 
 
 void GasPump::showLiter() {
-
-    double l = 00000.00;
-    cout << fixed << setprecision(7);
-    cout << left;
-    cout << setw(19) << "Liter : ";
-    cout << l << endl;
-
+    
+    string statement;
+        
+    statement = "Liter : ";
+    cout << fixed << setprecision(2) << left << setw(19) << statement << liter << "\r\n";
+    liter = liter + 0.2;
 };
 
 void GasPump::showCost() {
 
-    double p = 62.00;
-    cout << fixed << setprecision(2);
-    cout << left;
-    cout << setw(19) << "Price per Liter : ";
-    cout << p << endl;
+    string statement,s1;
+    s1 = "PhP ";
+    statement = "Price per Liter : ";
+    cout << fixed << setprecision(2) << left << setw(19) << statement << s1 << cost << "\n";
 
 };
 
 void GasPump::showTotal() {
-    double t = 00.00;
-    cout << fixed << setprecision(2);
-    cout << left;
-    cout << setw(19) << "Price : ";
-    cout << t << endl;
+    
+    string statement, s1;
+
+    statement = "Price : ";
+    
+    cout << fixed << setprecision(2) << left << setw(19) << statement << total << "\n";
+    total = cost * liter;
+
 };
 
