@@ -38,15 +38,15 @@ int main() {
     int ascii;
     bool t = true;
     
-    GasPump test; 
+    GasPump pump1; // object declaration
 
 
     do {
-        Sleep(150);
+        Sleep(150); // delay to avoid screen stuttering
         system("cls"); // clear screen
-        test.showLiter(); // show liter
-        test.showCost(); // show price per liter
-        test.showTotal(); // show total price
+        pump1.showLiter(); // show liter
+        pump1.showCost(); // show price per liter
+        pump1.showTotal(); // show total price
 
         key = getch(); // keyboard input
         ascii = key; // assigning char value of keyboard input to integer value of keyboard input
@@ -55,16 +55,18 @@ int main() {
             break;
         }
         else if (ascii == 13) { // pressing enter key to fill up the tank
-            test.calc(); 
+            pump1.calc(); 
         }
         else if (ascii == 120) { // x button
-            test.reset();   // resetting the values to 0
+            pump1.reset();   // resetting the values to 0
         }
         
     } while (t);
 
     return 0;
 };
+
+// Class implementation
 
 void GasPump::reset() { // method to reset the values
     
